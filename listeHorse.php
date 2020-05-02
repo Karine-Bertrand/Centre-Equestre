@@ -52,8 +52,9 @@ $chevaux = $response->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="card-body">
                                     <div class="card-title">
                                         <h2 class="text-center"><?= $cheval['nom'] ?></h2>
-                                        <p>Il s'agit d'<?= ($cheval['sexe'] === "0") ? 'un mâle' : (($cheval['sexe'] === "1") ? 'une femelle' : 'un cheval');?> de race <strong><?= $cheval['race'] ?></strong></p>
+                                        <p>Il s'agit d'<?= ($cheval['sexe'] === "0") ? 'un mâle' : (($cheval['sexe'] === "1") ? 'une femelle' : 'un cheval'); ?> de race <strong><?= $cheval['race'] ?></strong></p>
                                     </div>
+                                    <img src="assets/img/<?= $cheval['photo'] ?>" alt="..." class="card-img-bottom">
                                     <p class="card-text">
                                         <?= $cheval['nom'] ?> pèse <?= $cheval['poids'] ?> kg </br>
                                         et mesure <?= $cheval['taille'] ?> cm au garrot.
@@ -63,7 +64,6 @@ $chevaux = $response->fetchAll(PDO::FETCH_ASSOC);
                                         <a href="formDeleteHorse.php?id=<?= $cheval['id'] ?>" class="btn btn-secondary my-2">Supprimer</a>
                                     </div>
                                 </div>
-                                <img src="#" class="card-img-bottom" alt="pas d'image pour l'instant">
                             </div>
                         </div>
 

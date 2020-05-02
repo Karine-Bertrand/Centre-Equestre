@@ -32,18 +32,31 @@ if ($suite) {
 
 if ($suite) {
 
+    $_FILES['photo'];
+    $photo = $_FILES['photo'];
+
+    $tailleDuFichier = $photo['size']; //
+
+    $pathinfoData = pathinfo($photo['name']);
+    $nomDuFichier = $pathinfoData['filename'];
+    $extensionDuFichier = $pathinfoData['extension'];
+    $nouveauNomDuFichier = $nomDuFichier . '-' . uniqid() . '.' . $extensionDuFichier;
+
+    move_uploaded_file($photo['tmp_name'],  __DIR__  . '/assets/img/' . $nouveauNomDuFichier);
+
     // si tout est OK, modif du cheval dans la table
     require 'config/db.php';
     $request =  "UPDATE cheval 
-                SET nom = :nom, race = :race, sexe = :sexe, poids = :poids, taille = :taille
+                SET nom = :nom, race = :race, sexe = :sexe, poids = :poids, taille = :taille, photo = :photo
                 WHERE id = :id";
     $response = $bdd->prepare($request);
     $response->execute([
         'nom'       =>  $_POST['nom'],
         'race'      =>  $_POST['race'],
         'sexe'      =>  $_POST['sexe'],
-        'taille'    =>  $_POST['taille'],
         'poids'     =>  $_POST['poids'],
+        'taille'    =>  $_POST['taille'],
+        'photo'     =>  $nouveauNomDuFichier,
         'id'        =>  $_GET['id']
     ]);
 

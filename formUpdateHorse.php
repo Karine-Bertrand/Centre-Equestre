@@ -1,7 +1,7 @@
 <?php
 
 require 'config/db.php';
-$request= "SELECT * FROM cheval WHERE id=" . $_GET['id'];
+$request = "SELECT * FROM cheval WHERE id=" . $_GET['id'];
 $response = $bdd->query($request);
 $cheval = $response->fetch(PDO::FETCH_ASSOC);
 
@@ -29,7 +29,7 @@ $cheval = $response->fetch(PDO::FETCH_ASSOC);
             <div class="row">
                 <div class="col">
                     <h1>Mise à jour de la fiche du pensionnaire</h1>
-                    <form action="updateHorse.php?id=<?= $_GET['id'] ?>" method="post" class="form">
+                    <form action="updateHorse.php?id=<?= $_GET['id'] ?>" method="post" class="form" enctype="multipart/form-data" enctype="multipart/form-data">
 
                         <div class="form-group">
 
@@ -38,15 +38,15 @@ $cheval = $response->fetch(PDO::FETCH_ASSOC);
 
                             <label for="formRace">Race</label>
                             <select name="race" id="formRace" class="form-control">
-                                <option value="Paint Horse"     <?= ($cheval['race'] == 'Paint Horse' ? 'selected' : '') ?>>Paint Horse</option>
-                                <option value="Barbe"           <?= ($cheval['race'] == 'Barbe'?  'selected' : '') ?>>Barbe</option>
-                                <option value="Pur Sang"        <?= ($cheval['race'] == 'Pur Sang'?  'selected' : '') ?> >Pur Sang</option>
-                                <option value="Selle Française" <?= ($cheval['race'] == 'Selle Français'?  'selected' : '') ?> >Selle Française</option>
-                                <option value="KWPN"            <?= ($cheval['race'] == 'KWPN'?  'selected' : '') ?> >KWPN</option>
-                                <option value="Appaloosa"       <?= ($cheval['race'] == 'Appaloosa'?  'selected' : '') ?>>Appaloosa</option>
-                                <option value="Frison"          <?= ($cheval['race'] == 'Frison'?  'selected' : '') ?> >Frison</option>
-                                <option value="Shire"           <?= ($cheval['race'] == 'Shire'?  'selected' : '') ?> >Shire</option>
-                                <option value="Cob"             <?= ($cheval['race'] == 'Cob'?  'selected' : '') ?>>Cob</option>
+                                <option value="Paint Horse" <?= ($cheval['race'] == 'Paint Horse' ? 'selected' : '') ?>>Paint Horse</option>
+                                <option value="Barbe" <?= ($cheval['race'] == 'Barbe' ?  'selected' : '') ?>>Barbe</option>
+                                <option value="Pur Sang" <?= ($cheval['race'] == 'Pur Sang' ?  'selected' : '') ?>>Pur Sang</option>
+                                <option value="Selle Française" <?= ($cheval['race'] == 'Selle Français' ?  'selected' : '') ?>>Selle Française</option>
+                                <option value="KWPN" <?= ($cheval['race'] == 'KWPN' ?  'selected' : '') ?>>KWPN</option>
+                                <option value="Appaloosa" <?= ($cheval['race'] == 'Appaloosa' ?  'selected' : '') ?>>Appaloosa</option>
+                                <option value="Frison" <?= ($cheval['race'] == 'Frison' ?  'selected' : '') ?>>Frison</option>
+                                <option value="Shire" <?= ($cheval['race'] == 'Shire' ?  'selected' : '') ?>>Shire</option>
+                                <option value="Cob" <?= ($cheval['race'] == 'Cob' ?  'selected' : '') ?>>Cob</option>
                             </select>
 
 
@@ -62,6 +62,9 @@ $cheval = $response->fetch(PDO::FETCH_ASSOC);
 
                             <label for="formTaille">Taille (en cm)</label>
                             <input name="taille" id="formTaille" type="number" class="form-control" min="80" max="220" value="<?= $cheval['taille'] ?>">
+
+                            <label for="image">Sélectionner une photo</label>
+                            <input name="photo" type="file" value=<?= $cheval['photo'] ?>>
                         </div>
 
                         <input class="btn btn-primary" type="submit" value="Valider">

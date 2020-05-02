@@ -31,10 +31,24 @@ if ($suite){
 }
 if ($suite){
 
+    var_dump($_FILES);
+
+    $photo = $_FILES['image'];
+
+    $nomDuFichier = pathinfo($photo['name'])['filename'];
+    $extensionDuFichier = pathinfo($photo['name'])['extension'];
+    $nouveauNomDuFichier =  $nomDuFichier . '-' . uniqid() . '.' . $extensionDuFichier;
+
+    move_uploaded_file($photo['tmp_name'],  __DIR__  . '/assets/img/' . $nouveauNomDuFichier);
+    var_dump($photo);
+    var_dump($nomDuFichier);
+    var_dump($extensionDuFichier);
+    var_dump($nouveauNomDuFichier);
+
     // si tout est OK, ajout d'un cheval dans la table
     require 'config/db.php';
-    $request =  "INSERT INTO cheval (nom, race, sexe, poids, taille)
-                VALUES (:nom, :race, :sexe, :poids, :taille)";
+    $request =  "INSERT INTO cheval (nom, race, sexe, poids, taille, photo)
+                VALUES (:nom, :race, :sexe, :poids, :taille, :photo)";
     $response = $bdd->prepare($request);
     $response->execute([
         'nom'   =>  $_POST['nom'],
@@ -42,9 +56,11 @@ if ($suite){
         'sexe'  =>  $_POST['sexe'],
         'taille'=>  $_POST['taille'],
         'poids' =>  $_POST['poids'],
+        'photo' => $nouveauNomDuFichier
     ]);
 
-    header('Location: listeHorse.php');  /* affiche de la nouvelle liste mise à jour */
+
+    // header('Location: listeHorse.php');  /* affiche de la nouvelle liste mise à jour */
     }
     
 ?>

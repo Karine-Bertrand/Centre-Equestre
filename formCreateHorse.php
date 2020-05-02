@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col">
                     <h1>Nouveau pensionnaire</h1>
-                    <form action="createHorse.php" method="post" class="form">
+                    <form action="createHorse.php" method="post" class="form" enctype="multipart/form-data">
 
                         <div class="form-group">
 
@@ -54,6 +54,9 @@
 
                             <label for="formTaille">Taille (en cm)</label>
                             <input name="taille" id="formTaille" type="number" class="form-control" min="80" max="220">
+
+                            <label for="formImage">Selectionner une image</label>
+                            <input name="photo" id="formImage" type="file" class="form-control">
                         </div>
 
                         <input class="btn btn-primary" type="submit" value="Valider">
