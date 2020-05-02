@@ -38,14 +38,7 @@ $jockeys = $response->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="card-body">
                                     <div class="card-title">
                                         <h2 class="text-center"><?= $jockey['prenom'] . " " . $jockey['nom'] ?></h2>
-                                        <p>
-                                            <?php if ($jockey['niveau']>0){
-                                                $niveau = "Niveau validé : " . $jockey['niveau'];
-                                            } else{
-                                                $niveau = "pas d'inscription en examen";
-                                            } ?>
-                                        <?= $niveau ?>
-                                        </p>
+                                        <p> <?= ($jockey['niveau'] > 0)? "Niveau validé : " . $jockey['niveau'] : "non inscrit à l'examen" ; ?></p>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <a href="formUpdateJockey.php?id=<?= $jockey['id'] ?>" class="btn btn-primary my-2">Modifier</a>

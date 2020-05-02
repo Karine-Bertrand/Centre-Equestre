@@ -28,6 +28,7 @@
 
                             <label for="formRace">Race</label>
                             <select name="race" id="formRace" class="form-control">
+                                <option value=""></option>
                                 <option value="Paint Horse">Paint Horse</option>
                                 <option value="Barbe">Barbe</option>
                                 <option value="Pur Sang">Pur Sang</option>
@@ -42,6 +43,7 @@
 
                             <label for="formSexe">Sexe</label>
                             <select name="sexe" id="formSexe" class="form-control">
+                                <option value=""></option>
                                 <option value="0">mâle</option>
                                 <option value="1">femelle</option>
                                 <option value="2">non déterminé</option>

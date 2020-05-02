@@ -1,8 +1,7 @@
 <?php
 
 require 'config/db.php';
-
-$request = "SELECT * FROM cheval WHERE id=" . $_GET['id'];
+$request= "SELECT * FROM cheval WHERE id=" . $_GET['id'];
 $response = $bdd->query($request);
 $cheval = $response->fetch(PDO::FETCH_ASSOC);
 
@@ -39,23 +38,23 @@ $cheval = $response->fetch(PDO::FETCH_ASSOC);
 
                             <label for="formRace">Race</label>
                             <select name="race" id="formRace" class="form-control">
-                                <option value="Paint Horse" <?php if ($cheval['race'] == 'Paint Horse') { ?> selected <?php } ?>>Paint Horse</option>
-                                <option value="Barbe" <?php if ($cheval['race'] == 'Barbe') { ?> selected <?php } ?>>Barbe</option>
-                                <option value="Pur Sang" <?php if ($cheval['race'] == 'Pur Sang') { ?> selected <?php } ?>>Pur Sang</option>
-                                <option value="Selle Française" <?php if ($cheval['race'] == 'Selle Français') { ?> selected <?php } ?>>Selle Française</option>
-                                <option value="KWPN" <?php if ($cheval['race'] == 'KWPN') { ?> selected <?php } ?>>KWPN</option>
-                                <option value="Appaloosa" <?php if ($cheval['race'] == 'Appaloosa') { ?> selected <?php } ?>>Appaloosa</option>
-                                <option value="Frison" <?php if ($cheval['race'] == 'Frison') { ?> selected <?php } ?>>Frison</option>
-                                <option value="Shire" <?php if ($cheval['race'] == 'Shire') { ?> selected <?php } ?>>Shire</option>
-                                <option value="Cob" <?php if ($cheval['race'] == 'Cob') { ?> selected <?php } ?>>Cob</option>
+                                <option value="Paint Horse"     <?= ($cheval['race'] == 'Paint Horse' ? 'selected' : '') ?>>Paint Horse</option>
+                                <option value="Barbe"           <?= ($cheval['race'] == 'Barbe'?  'selected' : '') ?>>Barbe</option>
+                                <option value="Pur Sang"        <?= ($cheval['race'] == 'Pur Sang'?  'selected' : '') ?> >Pur Sang</option>
+                                <option value="Selle Française" <?= ($cheval['race'] == 'Selle Français'?  'selected' : '') ?> >Selle Française</option>
+                                <option value="KWPN"            <?= ($cheval['race'] == 'KWPN'?  'selected' : '') ?> >KWPN</option>
+                                <option value="Appaloosa"       <?= ($cheval['race'] == 'Appaloosa'?  'selected' : '') ?>>Appaloosa</option>
+                                <option value="Frison"          <?= ($cheval['race'] == 'Frison'?  'selected' : '') ?> >Frison</option>
+                                <option value="Shire"           <?= ($cheval['race'] == 'Shire'?  'selected' : '') ?> >Shire</option>
+                                <option value="Cob"             <?= ($cheval['race'] == 'Cob'?  'selected' : '') ?>>Cob</option>
                             </select>
 
 
                             <label for="formSexe">Sexe</label>
                             <select name="sexe" id="formSexe" class="form-control">
-                                <option value="0" <?php if ($cheval['sexe'] == '0') { ?> selected <?php } ?>>mâle</option>
-                                <option value="1" <?php if ($cheval['sexe'] == '1') { ?> selected <?php } ?>>femelle</option>
-                                <option value="2" <?php if ($cheval['sexe'] == '2') { ?> selected <?php } ?>>non déterminé</option>
+                                <option value="0" <?= ($cheval['sexe'] == '0' ? 'selected' : '') ?>>mâle</option>
+                                <option value="1" <?= ($cheval['sexe'] == '1' ? 'selected' : '') ?>>femelle</option>
+                                <option value="2" <?= ($cheval['sexe'] == '2' ? 'selected' : '') ?>>non déterminé</option>
                             </select>
 
                             <label for="formPoids">Poids (en kg)</label>

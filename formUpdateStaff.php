@@ -42,11 +42,11 @@ $staff = $response->fetch(PDO::FETCH_ASSOC);
 
                             <label for="formFonction">Fonction au sein des écuries</label>
                             <select name="fonction" id="formFonction" class="form-control" required>
-                                <option value="Dirigeant" <?php if($staff['fonction']="Dirigeant") { ?> selected <?php } ?> >Dirigeant</option>
-                                <option value="Vétérinaire" <?php if($staff['fonction']="Vétérinaire") { ?> selected <?php } ?> >Vétérinaire</option>
-                                <option value="Moniteur" <?php if($staff['fonction']="Moniteur") { ?> selected <?php } ?> >Moniteur</option>
-                                <option value="Maréchal ferrand" <?php if($staff['fonction']="Maréchal ferrand") { ?> selected <?php } ?> >Maréchal ferrand</option>
-                                <option value="Palfrenier" <?php if($staff['fonction']="Palfrenier") { ?> selected <?php } ?> >Palfrenier</option>
+                                <option value="Dirigeant"        <?= ($staff['fonction'] == 'dirigeant' ? 'selected' : '') ?> >Dirigeant</option>
+                                <option value="Vétérinaire"      <?= ($staff['fonction'] == 'vétérinaire' ? 'selected' : '') ?> >Vétérinaire</option>
+                                <option value="Moniteur"         <?= ($staff['fonction'] == 'moniteur' ? 'selected' : '') ?> >Moniteur</option>
+                                <option value="Maréchal ferrand" <?= ($staff['fonction'] == 'maréchal ferrand' ? 'selected' : '') ?> >Maréchal ferrand</option>
+                                <option value="Palfrenier"       <?= ($staff['fonction'] == 'palfrenier' ? 'selected' : '') ?> >Palfrenier</option>
                             </select>
 
                         </div>

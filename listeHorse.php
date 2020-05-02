@@ -1,24 +1,26 @@
 <?php
-require 'config/db.php';
 
+require 'config/db.php';
 $request = "SELECT * FROM cheval";
 $response = $bdd->query($request);
 $chevaux = $response->fetchAll(PDO::FETCH_ASSOC);
 
-function ecrireSexe($sexe)
-{
-    $genre = "";
-    if ($sexe == "0") {
-        $genre = "un mâle";
-    } elseif ($sexe == "1") {
-        $genre = "une femelle";
-    } else {
-        $genre = "un cheval";
-    }
-    return $genre;
-}
+// function chevalGenre($sexe){
+//     $genre="";
+//     if($sexe === "0"){
+//         $genre = "un mâle";
+//     }elseif($sexe === "1"){
+//         $genre = "une femelle";
+//     }else{
+//         $genre = "un cheval";
+//     return ($genre);
+//     }
+// }
 
 ?>
+
+
+
 
 <!doctype html>
 <html lang="en">
@@ -50,15 +52,15 @@ function ecrireSexe($sexe)
                                 <div class="card-body">
                                     <div class="card-title">
                                         <h2 class="text-center"><?= $cheval['nom'] ?></h2>
-                                        <p>Il s'agit d'<?= ecrireSexe($cheval['sexe']) ?> de race <strong><?= $cheval['race'] ?></strong></p>
+                                        <p>Il s'agit d'<?= ($cheval['sexe'] === "0") ? 'un mâle' : (($cheval['sexe'] === "1") ? 'une femelle' : 'un cheval');?> de race <strong><?= $cheval['race'] ?></strong></p>
                                     </div>
                                     <p class="card-text">
                                         <?= $cheval['nom'] ?> pèse <?= $cheval['poids'] ?> kg </br>
                                         et mesure <?= $cheval['taille'] ?> cm au garrot.
                                     </p>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <a href="formUpdateHorse.php?id=<? $cheval['id'] ?>" class="btn btn-primary my-2">Modifier</a>
-                                        <a href="formDeleteHorse.php?id=<? $cheval['id'] ?>" class="btn btn-secondary my-2">Supprimer</a>
+                                        <a href="formUpdateHorse.php?id=<?= $cheval['id'] ?>" class="btn btn-primary my-2">Modifier</a>
+                                        <a href="formDeleteHorse.php?id=<?= $cheval['id'] ?>" class="btn btn-secondary my-2">Supprimer</a>
                                     </div>
                                 </div>
                                 <img src="#" class="card-img-bottom" alt="pas d'image pour l'instant">
