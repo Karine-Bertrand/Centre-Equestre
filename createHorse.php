@@ -31,19 +31,17 @@ if ($suite){
 }
 if ($suite){
 
-    var_dump($_FILES);
+    $_FILES['photo'];
+    $photo = $_FILES['photo'];
 
-    $photo = $_FILES['image'];
+    $tailleDuFichier = $photo['size']; //
 
-    $nomDuFichier = pathinfo($photo['name'])['filename'];
-    $extensionDuFichier = pathinfo($photo['name'])['extension'];
-    $nouveauNomDuFichier =  $nomDuFichier . '-' . uniqid() . '.' . $extensionDuFichier;
+    $pathinfoData = pathinfo($photo['name']);
+    $nomDuFichier = $pathinfoData['filename'];
+    $extensionDuFichier = $pathinfoData['extension'];
+    $nouveauNomDuFichier = $nomDuFichier . '-' . uniqid() . '.' . $extensionDuFichier;
 
     move_uploaded_file($photo['tmp_name'],  __DIR__  . '/assets/img/' . $nouveauNomDuFichier);
-    var_dump($photo);
-    var_dump($nomDuFichier);
-    var_dump($extensionDuFichier);
-    var_dump($nouveauNomDuFichier);
 
     // si tout est OK, ajout d'un cheval dans la table
     require 'config/db.php';
@@ -60,7 +58,7 @@ if ($suite){
     ]);
 
 
-    // header('Location: listeHorse.php');  /* affiche de la nouvelle liste mise à jour */
+    header('Location: listeHorse.php');  /* affiche de la nouvelle liste mise à jour */
     }
     
 ?>

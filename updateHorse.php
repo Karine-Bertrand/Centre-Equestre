@@ -31,21 +31,30 @@ if ($suite) {
 }
 
 if ($suite) {
-
-    $_FILES['photo'];
-    $photo = $_FILES['photo'];
-
-    $tailleDuFichier = $photo['size']; //
-
-    $pathinfoData = pathinfo($photo['name']);
-    $nomDuFichier = $pathinfoData['filename'];
-    $extensionDuFichier = $pathinfoData['extension'];
-    $nouveauNomDuFichier = $nomDuFichier . '-' . uniqid() . '.' . $extensionDuFichier;
-
-    move_uploaded_file($photo['tmp_name'],  __DIR__  . '/assets/img/' . $nouveauNomDuFichier);
+    
+    if($_FILES['photo']['name'] === ""){
+        echo "pas de changement";
+        $nomPhoto=$_POST['photo_avant'];
+    }else{
+        echo "photo modifiée";
+        $_FILES['photo'];
+        $photo = $_FILES['photo'];
+        $tailleDuFichier = $photo['size']; 
+        $pathinfoData = pathinfo($photo['name']);
+        $nomDuFichier = $pathinfoData['filename'];
+        $extensionDuFichier = $pathinfoData['extension'];
+        if($extensionDuFichier!='jpg' && $photo['type']!="image/jpeg"){
+            $suite = false;
+            $msg = $msg . "Le type de format de l'image n'est pas pris en charge : utilisez un format jpeg";
+        }elseif($tailleDuFichier > 3145728 ){
+            $msg = $msg .  "L'image est trop volumineuse : taille maxi autorisée 3 Mb";
+        }
+        $nomPhoto = $nomDuFichier . '-' . uniqid() . '.' . $extensionDuFichier;
+        move_uploaded_file($photo['tmp_name'],  __DIR__  . '/assets/img/' . $nomPhoto);
+    }
 
     // si tout est OK, modif du cheval dans la table
-    require 'config/db.php';
+    require 'config/db.php'; // connexion à la db
     $request =  "UPDATE cheval 
                 SET nom = :nom, race = :race, sexe = :sexe, poids = :poids, taille = :taille, photo = :photo
                 WHERE id = :id";
@@ -56,7 +65,7 @@ if ($suite) {
         'sexe'      =>  $_POST['sexe'],
         'poids'     =>  $_POST['poids'],
         'taille'    =>  $_POST['taille'],
-        'photo'     =>  $nouveauNomDuFichier,
+        'photo'     =>  $nomPhoto,
         'id'        =>  $_GET['id']
     ]);
 
@@ -64,6 +73,8 @@ if ($suite) {
 }
 
 ?>
+
+<!-- la partie html s'exécute si on n'est pas sorti de la page -->
 <!doctype html>
 <html lang="en">
 
