@@ -31,22 +31,22 @@ if ($suite) {
 }
 
 if ($suite) {
-    
-    if($_FILES['photo']['name'] === ""){
+
+    if ($_FILES['photo']['name'] === "") {
         echo "pas de changement";
-        $nomPhoto=$_POST['photo_avant'];
-    }else{
+        $nomPhoto = $_POST['photo_avant'];
+    } else {
         echo "photo modifiée";
         $_FILES['photo'];
         $photo = $_FILES['photo'];
-        $tailleDuFichier = $photo['size']; 
+        $tailleDuFichier = $photo['size'];
         $pathinfoData = pathinfo($photo['name']);
         $nomDuFichier = $pathinfoData['filename'];
         $extensionDuFichier = $pathinfoData['extension'];
-        if($extensionDuFichier!='jpg' && $photo['type']!="image/jpeg"){
+        if ($extensionDuFichier != 'jpg' && $photo['type'] != "image/jpeg") {
             $suite = false;
             $msg = $msg . "Le type de format de l'image n'est pas pris en charge : utilisez un format jpeg";
-        }elseif($tailleDuFichier > 3145728 ){
+        } elseif ($tailleDuFichier > 3145728) {
             $msg = $msg .  "L'image est trop volumineuse : taille maxi autorisée 3 Mb";
         }
         $nomPhoto = $nomDuFichier . '-' . uniqid() . '.' . $extensionDuFichier;
@@ -75,28 +75,14 @@ if ($suite) {
 ?>
 
 <!-- la partie html s'exécute si on n'est pas sorti de la page -->
-<!doctype html>
-<html lang="en">
+<?php include('partials/script.php') ?>
 
-<head>
-    <title>Echec</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h3>Modification non valide</h3>
+        <p><strong><?= $msg ?></strong></p>
+        <a href="formUpdateHorse.php" class="btn btn-primary">Retour</a>
+    </div>
+</section>
 
-<body>
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h3>Modification non valide</h3>
-            <p><strong><?= $msg ?></strong></p>
-            <a href="formUpdateHorse.php" class="btn btn-primary">Retour</a>
-        </div>
-    </section>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-
-</html>
+<?php include('partials/script.php') ?>
